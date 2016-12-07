@@ -12,16 +12,14 @@ public class ScoreManager : MonoBehaviour {
 	public float scoreCount;
 	public float highScoreCount;
 
-	private bool isDead;
-
 	// Use this for initialization
 	void Start () {
-		isDead = Player.GetComponent<controller> ().dead;
+		
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (isDead) {
+		if (Player.GetComponent<controller>().dead) {
 			scoreCount = 0;
 		}
 		scoreCount += 10 * Time.deltaTime;

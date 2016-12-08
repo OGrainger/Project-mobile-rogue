@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(controller))]
+
 public class ScoreManager : MonoBehaviour {
 
 	public Text scoreText;

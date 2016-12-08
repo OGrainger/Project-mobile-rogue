@@ -3,75 +3,99 @@ using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
-
-
+[RequireComponent(typeof(Animator))]
 
 public class controller : MonoBehaviour {
+	
+	private BoxCollider2D playerCollider;
+	private Animator animator;
+	private Rigidbody2D playerRigidBody;
+
+	private bool trigger_jumpsReset;
+	private bool trigger_playerIsOffGround;
+
+	private int jumpCounter;
+	private bool jumpKey;
+
+	//Les 2 float bougeront en private en haut après être sûr que ça ne bug pas
 	public float moveSpeed;
 	public float jumpForce;
 
-	private Rigidbody2D playerRigidBody;
-
 	public bool grounded;
+	public bool dead;
 	public LayerMask whatIsGround;
-	private BoxCollider2D playerCollider;
-	private Animator animator;
-
 	public LayerMask whatIsPermaDeath;
+
 	public Transform playerStartPoint;
 	public Transform PlatformGenerator;
-	public Transform Camera;
-	public bool dead;
+
 	public int jumpMax;
-	private int jumpCounter;
+
 
 	void Start () {
 		playerRigidBody = GetComponent<Rigidbody2D> ();
 		playerCollider = GetComponent<BoxCollider2D> ();
 		animator = GetComponent<Animator> ();
+
 		jumpCounter = jumpMax;
+
+		trigger_jumpsReset = false;
+		trigger_playerIsOffGround = true;
 	}
 
 	void Update () {
 
-		if (playerRigidBody.velocity.y == 0) {
-			grounded = Physics2D.IsTouchingLayers (playerCollider, whatIsGround);
-		} else {
-			grounded = false;
-		}
+		//Variables pour les animations
+		animator.SetBool ("grounded", grounded);
+		animator.SetFloat ("velocity", playerRigidBody.velocity.x);
 
-
+		//Si le joueur est mort
 		dead = Physics2D.IsTouchingLayers (playerCollider, whatIsPermaDeath);
 
-		playerRigidBody.velocity = new Vector2(moveSpeed, playerRigidBody.velocity.y);
+		grounded = Physics2D.IsTouchingLayers (playerCollider, whatIsGround);
 
-		if (jumpMax == 0) {
-			//
-		} else if (Input.GetKeyDown (KeyCode.Space) && jumpCounter == jumpMax && grounded) {
-			playerRigidBody.velocity = new Vector2 (playerRigidBody.velocity.x, jumpForce);
-			jumpCounter--;
-		} else if (Input.GetKeyDown (KeyCode.Space) && jumpCounter == jumpMax) {
-			//
-		} else if (Input.GetKeyDown (KeyCode.Space) && jumpCounter > 0) {
-			playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, jumpForce);
-			jumpCounter--;
+		//PAS SUR ORDI
+		jumpKey = Input.GetKeyDown(KeyCode.Space);
+
+		if (jumpKey) {
+			Jump ();
 		}
 
-		if (grounded && !Input.GetKeyDown(KeyCode.Space)) {
+		if (grounded && !trigger_jumpsReset) {
 			jumpCounter = jumpMax;
+			trigger_jumpsReset = true;
+			trigger_playerIsOffGround = false;
+
+		} else if (!grounded && !trigger_playerIsOffGround) {
+			trigger_jumpsReset = false;
+			trigger_playerIsOffGround = true;
+			jumpCounter--;
 		}
-			
+
 		if (dead) {
 			transform.position = new Vector2(playerStartPoint.position.x, playerStartPoint.position.y);
 			PlatformGenerator.position = new Vector2(30, 0);
-			Camera.position = new Vector2 (0, 1);
 		}
+	}
 
+	void FixedUpdate () {
+
+		playerRigidBody.velocity = new Vector2 (moveSpeed, playerRigidBody.velocity.y);
 
 	}
-	void HandleAnimator()
-	{
-		animator.SetBool ("grounded", grounded);
-		animator.SetFloat ("velocity", playerRigidBody.velocity.x);
+
+	public void Jump() {
+		if (jumpMax == 0) {
+			return;
+		} else if (jumpCounter == jumpMax) {
+			playerRigidBody.velocity = new Vector2 (moveSpeed, jumpForce);
+			return;
+		} else if (jumpCounter > 0) {
+			playerRigidBody.velocity = new Vector2 (moveSpeed, jumpForce);
+			jumpCounter--;
+			return;
+		} else {
+			return;
+		}
 	}
 }

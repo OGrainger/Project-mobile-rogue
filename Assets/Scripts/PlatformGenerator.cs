@@ -18,8 +18,6 @@ public class PlatformGenerator : MonoBehaviour {
 
 	private GameObject platform;
 
-	private float heightMin = 0;
-	private float heightMax = 20;
 	public float heightDifferenceMax;
 	private float heightDifference;
 
@@ -41,6 +39,14 @@ public class PlatformGenerator : MonoBehaviour {
 			if (distanceBetween < 3) {
 				distanceBetween = 0;
 				heightDifference = 0;
+			}
+			if (distanceBetween >= 3) {
+				distanceBetween = distanceBetweenMax;
+			}
+			if (heightDifference >= 1) {
+				heightDifference = heightDifferenceMax;
+			} else if (heightDifference <= -1) {
+				heightDifference = -heightDifferenceMax;
 			}
 
 			platformSelector = Random.Range (0, platforms.Length);

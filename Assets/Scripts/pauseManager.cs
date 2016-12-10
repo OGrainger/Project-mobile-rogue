@@ -6,6 +6,8 @@ public class pauseManager : MonoBehaviour {
 	public bool pause;
 
 	public GameObject dim;
+	public GameObject button1;
+	public GameObject button2;
 
 	// Use this for initialization
 	void Start () {
@@ -26,9 +28,13 @@ public class pauseManager : MonoBehaviour {
 
 		if (pause) {
 			Time.timeScale = 0;
+			button1.SetActive (false);
+			button2.SetActive (false);
 			dim.SetActive (true);
 		} else {
 			Time.timeScale = 1;
+			button1.SetActive (true);
+			button2.SetActive (true);
 			dim.SetActive (false);
 		}
 	}

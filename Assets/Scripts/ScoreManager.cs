@@ -5,26 +5,35 @@ using UnityEngine.UI;
 [RequireComponent(typeof(controller))]
 
 public class ScoreManager : MonoBehaviour {
+	
+	private Transform playerPosition;
+
+	private float scoreCount;
+	private float highScoreCount;
 
 	public Text scoreText;
 	public Text highscoreText;
-	public Transform playerPosition;
 	public GameObject Player;
-
-	public float scoreCount;
-	public float highScoreCount;
 
 	// Use this for initialization
 	void Start () {
+		highScoreCount = PlayerPrefs.GetFloat ("highScore");
+		playerPosition = Player.GetComponent<Transform> ();
 		
 	}
 
 	// Update is called once per frame
 	void Update () {
+		
+		scoreCount = playerPosition.position.x;
+
 		if (Player.GetComponent<controller>().dead) {
+			if (scoreCount > highScoreCount) {
+				PlayerPrefs.SetFloat("highScore", scoreCount);
+			}
 			scoreCount = 0;
 		}
-		scoreCount += 10 * Time.deltaTime;
+
 		scoreText.text = "Score : " + Mathf.Round(scoreCount);
 		if (scoreCount > highScoreCount) {
 			highScoreCount = scoreCount;

@@ -17,6 +17,8 @@ public class controller : MonoBehaviour {
 	private int jumpCounter;
 	private bool jumpKey;
 
+	private bool switch_secondary;
+
 	//Les 2 float bougeront en private en haut après être sûr que ça ne bug pas
 	public float moveSpeed;
 	public float jumpForce;
@@ -41,13 +43,16 @@ public class controller : MonoBehaviour {
 
 		trigger_jumpsReset = false;
 		trigger_playerIsOffGround = true;
+
+		switch_secondary = false;
 	}
 
 	void Update () {
 
 		//Variables pour les animations
 		animator.SetBool ("grounded", grounded);
-		animator.SetFloat ("velocity", playerRigidBody.velocity.x);
+		animator.SetFloat ("velocityX", playerRigidBody.velocity.x);
+		animator.SetFloat ("velocityY", playerRigidBody.velocity.y);
 
 		//Si le joueur est mort
 		dead = Physics2D.IsTouchingLayers (playerCollider, whatIsPermaDeath);
@@ -62,9 +67,9 @@ public class controller : MonoBehaviour {
 		}
 
 		if (grounded && !trigger_jumpsReset) {
-			jumpCounter = jumpMax;
 			trigger_jumpsReset = true;
 			trigger_playerIsOffGround = false;
+			jumpCounter = jumpMax;
 
 		} else if (!grounded && !trigger_playerIsOffGround) {
 			trigger_jumpsReset = false;
@@ -74,7 +79,7 @@ public class controller : MonoBehaviour {
 
 		if (dead) {
 			transform.position = new Vector2(playerStartPoint.position.x, playerStartPoint.position.y);
-			PlatformGenerator.position = new Vector2(30, 0);
+			PlatformGenerator.position = new Vector2(100, 0);
 		}
 	}
 
@@ -97,5 +102,16 @@ public class controller : MonoBehaviour {
 		} else {
 			return;
 		}
+	}
+
+	public void Secondary () {
+		if (!switch_secondary) {
+			Time.timeScale = 0.5f;
+			switch_secondary = true;
+		} else {
+			Time.timeScale = 1;
+			switch_secondary = false;
+		}
+
 	}
 }

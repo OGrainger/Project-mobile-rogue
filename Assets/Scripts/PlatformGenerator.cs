@@ -2,62 +2,60 @@
 using System.Collections;
 
 public class PlatformGenerator : MonoBehaviour {
+	
+	public float platformWidthDifference;
 
-	public Transform generationPoint;
-	private float distanceBetween;
+	private float heightDifference;
+	private float platformHeightDifference;
 
-	private float platformWidth;
-
-
-	public float distanceBetweenMin;
-	public float distanceBetweenMax;
+	private int platformSelector;
+	private GameObject platform;
+	private int previousPlatformSelector;
 
 	public GameObject[] platforms;
 
-	private int platformSelector;
+	public Transform generationPoint;
 
-	private GameObject platform;
+	public float distanceBetween;
+
 
 	public float heightDifferenceMax;
-	private float heightDifference;
 
 	// Use this for initialization
 	void Start () {
-		
+		previousPlatformSelector = 0;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (transform.position.x < generationPoint.position.x) {
-			distanceBetween = Random.Range (distanceBetweenMin, distanceBetweenMax);
 
-			heightDifference = Random.Range (-(heightDifferenceMax), heightDifferenceMax);
-			if (heightDifference < 1 && heightDifference > -1) {
-				heightDifference = 0;
-			}
-
-			if (distanceBetween < 3) {
-				distanceBetween = 0;
-				heightDifference = 0;
-			}
-			if (distanceBetween >= 3) {
-				distanceBetween = distanceBetweenMax;
-			}
-			if (heightDifference >= 1) {
-				heightDifference = heightDifferenceMax;
-			} else if (heightDifference <= -1) {
-				heightDifference = -heightDifferenceMax;
-			}
+			heightDifference = HeightCalc ();
 
 			platformSelector = Random.Range (0, platforms.Length);
+			
 			platform = platforms [platformSelector];
-			platformWidth = platform.GetComponent<BoxCollider2D>().size.x;
+			platformWidthDifference = platform.GetComponent<ObjectInfo>().widthDifference;
+			platformHeightDifference = platform.GetComponent<ObjectInfo>().heightDifference;
 
 			Instantiate (platform, transform.position, transform.rotation);
 
-			transform.position = new Vector3 (transform.position.x + platformWidth + distanceBetween, transform.position.y + heightDifference, transform.position.z);
+			transform.position = new Vector3 (transform.position.x + platformWidthDifference + distanceBetween, transform.position.y + platformHeightDifference + heightDifference, transform.position.z);
 
-
+			previousPlatformSelector = platformSelector;
 		}
+	}
+
+	public float HeightCalc () {
+		heightDifference = Random.Range (-(heightDifferenceMax), heightDifferenceMax);
+
+		if (heightDifference < heightDifferenceMax/2 && heightDifference > -heightDifferenceMax/2) {
+			heightDifference = 0;
+		} else if (heightDifference >= heightDifferenceMax/2) {
+			heightDifference = heightDifferenceMax;
+		} else if (heightDifference <= -heightDifferenceMax/2) {
+			heightDifference = -heightDifferenceMax;
+		}
+		return heightDifference;
 	}
 }

@@ -79,12 +79,11 @@ public class controller : MonoBehaviour {
 
 		if (dead) {
 			transform.position = new Vector2(playerStartPoint.position.x, playerStartPoint.position.y);
-			PlatformGenerator.position = new Vector2(100, 0);
+			PlatformGenerator.position = new Vector2(50, 0);
 		}
 	}
 
 	void FixedUpdate () {
-
 		playerRigidBody.velocity = new Vector2 (moveSpeed, playerRigidBody.velocity.y);
 
 	}

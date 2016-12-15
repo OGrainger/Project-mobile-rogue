@@ -9,10 +9,13 @@ public class pauseManager : MonoBehaviour {
 	public GameObject button1;
 	public GameObject button2;
 
+	public GameObject highscore;
+
 	// Use this for initialization
 	void Start () {
 		pause = false;
 		dim.SetActive (false);
+
 	}
 	
 	// Update is called once per frame

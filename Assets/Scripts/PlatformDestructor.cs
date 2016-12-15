@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PlatformDestructor : MonoBehaviour {
 
+	private float widthOfPlatform;
+
 	public GameObject platformDestructPoint;
 	public GameObject Player;
 
@@ -10,11 +12,12 @@ public class PlatformDestructor : MonoBehaviour {
 	void Start () {
 		platformDestructPoint = GameObject.Find ("PlatformDestructPoint");
 		Player = GameObject.Find ("Player");
+		widthOfPlatform = GetComponent<ObjectInfo> ().widthDifference;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (transform.position.x < platformDestructPoint.transform.position.x || Player.GetComponent<controller>().dead) {
+		if (transform.position.x + widthOfPlatform < platformDestructPoint.transform.position.x || Player.GetComponent<Transform>().position.x < 5) {
 			Destroy (gameObject);
 		}
 	}

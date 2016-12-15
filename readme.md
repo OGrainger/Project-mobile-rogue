@@ -1,6 +1,13 @@
 #Projet Mobile Rogue
 
 ##Version History
+###Alpha 3
+ - Start menu
+ - Reduced texture sizes
+ - Adjusted camera position, speed and force jump for the new texture sizes (21x21)
+ - Better destruction script (taking the platform's width into account)
+ - Textures from Kenney (external asset) prepared
+ 
 ###Alpha 2
  - Pause menu + added a pause button on top
  - Added a secondary button

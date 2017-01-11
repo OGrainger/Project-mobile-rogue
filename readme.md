@@ -4,6 +4,7 @@
 
 ###Alpha 4
  - Added plateforms with kenney artwork
+ - Textured and animated the character with kenney artwork
 
 ###Alpha 3
  - Start menu

@@ -1,6 +1,10 @@
 #Projet Mobile Rogue
 
 ##Version History
+
+###Alpha 4
+ - Added plateforms with kenney artwork
+
 ###Alpha 3
  - Start menu
  - Reduced textures size

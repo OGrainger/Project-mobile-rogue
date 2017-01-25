@@ -1,8 +1,6 @@
 #Projet Mobile Rogue
 
 ##Version History
-<<<<<<< HEAD
-=======
 
 ###Alpha 4
  - Added plateforms with kenney artwork
@@ -14,7 +12,7 @@
  - Adjusted camera position, speed and jump force for the new textures size (21x21)
  - Better destruction script (taking the platform's width into account)
  - Textures from Kenney (external asset) prepared
- 
+
 ###Alpha 2
  - Pause menu + added a pause button on top
  - Added a secondary button
@@ -29,4 +27,3 @@
  - Score system based on time
  - Highscore stored between sessions which increases dynamically with the score
  - Basic animations based on a temporary design
->>>>>>> branche-oscar

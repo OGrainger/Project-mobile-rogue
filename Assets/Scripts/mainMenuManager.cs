@@ -5,7 +5,7 @@ public class mainMenuManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -14,6 +14,6 @@ public class mainMenuManager : MonoBehaviour {
 	}
 
 	public void startBtn() {
-		Application.LoadLevel ("PlatformDemo");
+		Application.LoadLevel(1);
 	}
 }

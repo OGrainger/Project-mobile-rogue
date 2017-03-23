@@ -33,6 +33,9 @@ public class controller : MonoBehaviour {
 
 	public int jumpMax;
 
+	public AudioSource soundJump;
+	public AudioSource soundDeath;
+
 
 	void Start () {
 		playerRigidBody = GetComponent<Rigidbody2D> ();
@@ -78,6 +81,7 @@ public class controller : MonoBehaviour {
 		}
 
 		if (dead) {
+			soundDeath.Play ();
 			transform.position = new Vector2(playerStartPoint.position.x, playerStartPoint.position.y);
 			PlatformGenerator.position = new Vector2(50, 0);
 		}
@@ -93,9 +97,11 @@ public class controller : MonoBehaviour {
 			return;
 		} else if (jumpCounter == jumpMax) {
 			playerRigidBody.velocity = new Vector2 (moveSpeed, jumpForce);
+			soundJump.Play();
 			return;
 		} else if (jumpCounter > 0) {
 			playerRigidBody.velocity = new Vector2 (moveSpeed, jumpForce);
+			soundJump.Play();
 			jumpCounter--;
 			return;
 		} else {

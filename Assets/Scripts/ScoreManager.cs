@@ -19,7 +19,6 @@ public class ScoreManager : MonoBehaviour {
 	void Start () {
 		highScoreCount = PlayerPrefs.GetFloat ("highScore");
 		playerPosition = Player.GetComponent<Transform> ();
-		
 	}
 
 	// Update is called once per frame

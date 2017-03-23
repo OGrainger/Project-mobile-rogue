@@ -1,12 +1,11 @@
 fileFormatVersion: 2
-guid: ac380d670db4a4fe4a8915b56760a3de
-timeCreated: 1490301737
+guid: 62743bbed85ea491580b6e9007d2797a
+timeCreated: 1490293285
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: backgrounds_0
-    21300002: backgrounds_1
-    21300004: backgrounds_2
+    21300000: menu_char_0
+    21300002: menu_char_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -56,39 +55,26 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: backgrounds_0
+      name: menu_char_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 126
-        width: 231
-        height: 63
+        x: 486
+        y: 669
+        width: 18
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: backgrounds_1
+      name: menu_char_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 63
-        width: 231
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: backgrounds_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 231
-        height: 63
+        x: 486
+        y: 646
+        width: 18
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
